@@ -1,0 +1,14 @@
+set encoding=utf-8
+
+set number
+set ruler
+set showmatch
+
+set nowrapscan
+set ignorecase
+set tabstop=4
+set expandtab
+
+set paste
+
+set fileformats=unix,dos,mac
