@@ -1,0 +1,9 @@
+[user]
+	name = Mitsukuni Sato
+	email = mitsukuni.sato@gmail.com
+
+[color]
+	diff = no
+	status = auto
+	branch = auto
+

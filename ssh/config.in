@@ -1,0 +1,6 @@
+# global configuration
+ServerAliveInterval 30
+
+# for ssh v1 protocol
+Compression yes
+CompressionLevel 9

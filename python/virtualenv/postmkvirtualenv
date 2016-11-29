@@ -1,0 +1,2 @@
+pip -E ${VIRTUAL_ENV} install setuptools --upgrade
+pip -E ${VIRTUAL_ENV} install ipython --upgrade

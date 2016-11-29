@@ -1,0 +1,7 @@
+[ui]
+username = Mitsukuni Sato <mitsukuni.sato@gmail.com>
+
+[extensions]
+color = 
+pager = 
+hgext.graphlog = 
