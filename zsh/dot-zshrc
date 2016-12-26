@@ -8,11 +8,19 @@ bindkey "^[b" emacs-backward-word
 export WORDCHARS=""
 
 setopt auto_cd
-setopt extended_history
+setopt nobeep
+
+# history settings
+HISTFILE=$HOME/.zsh-history
+HISTSIZE=100000
+SAVEHIST=100000
+
 setopt share_history
-function history-all { history -E 1 }
+setopt hist_ignore_dups
+setopt extended_history
 
 fpath=(~/.zsh.d/ $fpath)
+autoload history-search-end
 autoload -U colors; colors
 autoload -U compinit; compinit
 autoload -Uz vcs_info
@@ -35,10 +43,6 @@ unsetopt promptcr
 
 # setopt listtype
 
-HISTFILE=$HOME/.zsh-history
-HISTSIZE=100000
-SAVEHIST=100000
-
 export PATH=${HOME}/local/bin:/usr/local/bin:/usr/bin:/bin:/usr/X11R6/bin:/usr/local/sbin:/usr/sbin:/sbin
 export MANPATH=/usr/share/man:/usr/local/man:/usr/X11R6/man
 export LANG=ja_JP.UTF-8
@@ -46,7 +50,6 @@ export EDITOR=vi
 export RSYNC_SSH=ssh
 
 alias rgrep="grep -r"
-alias diff="colordiff"
 alias less="less -R"
 alias ll="ls -l"
 alias la="ls -a"
