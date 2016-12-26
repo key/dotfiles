@@ -23,7 +23,13 @@ precmd () {
     LANG=en_US.UTF-8 vcs_info
     [[ -n "$vcs_info_msg_0_" ]] && psvar[1]="$vcs_info_msg_0_"
 }
+
 PROMPT="%{${fg[yellow]}%}[%n@%m%1(v|%F{green}%1v%f|)%{${fg[yellow]}%}]%{${reset_color}%}%b "
+# PROMPT='$USER@%m%%%u '
+# PROMPT='$USER@'`hostname -s`'%%%u '
+RPROMPT='[%~]'
+setopt prompt_subst
+unsetopt promptcr
 
 #autoload -U sshsocket
 
@@ -33,21 +39,11 @@ HISTFILE=$HOME/.zsh-history
 HISTSIZE=100000
 SAVEHIST=100000
 
-setopt prompt_subst
-# PROMPT='$USER@%m%%%u '
-# PROMPT='$USER@'`hostname -s`'%%%u '
-RPROMPT='[%~]'
-
 export PATH=${HOME}/local/bin:/usr/local/bin:/usr/bin:/bin:/usr/X11R6/bin:/usr/local/sbin:/usr/sbin:/sbin
 export MANPATH=/usr/share/man:/usr/local/man:/usr/X11R6/man
 export LANG=ja_JP.UTF-8
 export EDITOR=vi
 export RSYNC_SSH=ssh
-export WORKON_HOME=${HOME}/Documents/virtualenv
-export PIP_DOWNLOAD_CACHE=~/.pip_cache
-export PIP_RESPECT_VIRTUALENV=true
-export PIP_REQUIRE_VIRTUALENV=true
-export VIRTUALENV_USE_DISTRIBUTE=true
 
 alias rgrep="grep -r"
 alias diff="colordiff"
@@ -71,10 +67,6 @@ if [ -f /usr/bin/vim ]; then
         alias vi="vim"
 fi
 
-if [ -x /Applications/Emacs.app/Contents/MacOS/Emacs ] ; then
-        alias emacs='/Applications/Emacs.app/Contents/MacOS/Emacs -nw'
-fi
-
 ##
 ## PATH setting
 ## 
@@ -84,56 +76,26 @@ if [ -d /usr/local/pgsql/bin ]; then
 	export PATH=/usr/local/pgsql/bin:$PATH
 	export MANPATAH=/usr/local/pgsql/man:$MANPATH
 fi
-if [ -d /Library/Frameworks/Python.framework/Versions/2.7/bin ]; then
-	export PATH=/Library/Frameworks/Python.framework/Versions/2.7/bin:${PATH}
-fi
-
-# fink
-if [ -d /sw/sbin ]; then
-        export PATH=/sw/sbin:$PATH
-fi
-if [ -d /sw/bin ]; then
-        export PATH=/sw/bin:$PATH
-fi
-
-# pkgsrc
-if [ -d /usr/pkg/bin ]; then
-        export PATH=$PATH:/usr/pkg/bin
-fi
-
-# MacPorts
-if [ -d /opt/local/bin ]; then
-	export PATH=/opt/local/bin:/opt/local/sbin:$PATH
-	export MANPATH=/opt/local/man:$MANPATH
-fi
 
 # python
+export WORKON_HOME=${HOME}/Documents/virtualenv
+export PIP_DOWNLOAD_CACHE=~/.pip_cache
+export PIP_RESPECT_VIRTUALENV=true
+export PIP_REQUIRE_VIRTUALENV=true
+export VIRTUALENV_USE_DISTRIBUTE=true
+
 if [ -f ${HOME}/.pythonrc.py ]; then
 	export PYTHONSTARTUP=${HOME}/.pythonrc.py
 fi
 
-# virtualenv on MacPorts
-if [ -f /opt/local/bin/virtualenvwrapper_bashrc-2.6 ]; then
-	alias virtualenv=/opt/local/bin/virtualenv-2.6
-	source /opt/local/bin/virtualenvwrapper_bashrc-2.6 
-	if [ -f /opt/local/Library/Frameworks/Python.framework/Versions/2.6/lib/python2.6/pdb.py ]; then
-		alias pdb='/opt/local/Library/Frameworks/Python.framework/Versions/2.6/lib/python2.6/pdb.py'
-	fi
-elif [ -f  /opt/local/bin/virtualenvwrapper_bashrc-2.5 ]; then
-	alias virtualenv=/opt/local/bin/virtualenv-2.5
-	source /opt/local/bin/virtualenvwrapper_bashrc-2.5
-	if [ -f /opt/local/lib/python2.5/pdb.py ]; then
-		alias pdb='/opt/local/lib/python2.5/pdb.py'
-	fi
-elif [ -f /Library/Frameworks/Python.framework/Versions/2.7/bin ]; then
-	source /Library/Frameworks/Python.framework/Versions/2.7/bin/virtualenvwrapper.sh
-else
-	source virtualenvwrapper.sh
-fi
+# pyenv
+export PYENV_ROOT=${HOME}/.pyenv
+export PATH=${PYENV_ROOT}/bin:$PATH
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
 
-# pkgconfig
-if [ -d /opt/local/lib/pkgconfig ]; then
-	export PKG_CONFIG_PATH=/opt/local/lib/pkgconfig/
-fi
+# rbenv
+export RBENV_ROOT=${HOME}/.rbenv
+export PATH=${RBENV_ROOT}/bin:$PATH
+eval "$(rbenv init -)"
 
-unsetopt PROMPT_CR
