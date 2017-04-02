@@ -1,14 +1,12 @@
-escape ^T^T
-vbell off
-deflogin off
-bell "Bell in window %."
 activity "Activity in window %."
+altscreen on
 autodetach on
-startup_message off
-termcapinfo  xterm|kterm|kterm-color 'hs:ts=\E]2;:fs=\007:ds=\E]0;screen\007'
-terminfo xterm|kterm|kterm-color XT # for mice
-shell -$SHELL
+bell "Bell in window %."
 defscrollback 1000
-# hardstatus string " %m/%d %D %c [%n:%Lw] %H:%h"
+escape ^T^T
 hardstatus off
-
+shell -$SHELL
+startup_message off
+termcapinfo xterm|kterm|kterm-color 'hs:ts=\E]2;:fs=\007:ds=\E]0;screen\007'
+terminfo xterm|kterm|kterm-color XT # for mice
+vbell off
