@@ -19,7 +19,14 @@ setopt share_history
 setopt hist_ignore_dups
 setopt extended_history
 
+# zsh-completionsの設定
 fpath=(~/.zsh.d/ $fpath)
+fpath=($HOME/.anyenv/completions/ $fpath)
+fpath=(/usr/local/share/zsh/site-functions $fpath)
+ 
+autoload -U compinit
+compinit -u
+
 autoload history-search-end
 autoload -U colors; colors
 autoload -U compinit; compinit
@@ -84,8 +91,6 @@ fi
 export WORKON_HOME=${HOME}/Documents/virtualenv
 export PIP_DOWNLOAD_CACHE=~/.pip_cache
 export PIP_RESPECT_VIRTUALENV=true
-export PIP_REQUIRE_VIRTUALENV=true
-export VIRTUALENV_USE_DISTRIBUTE=true
 
 if [ -f ${HOME}/.pythonrc.py ]; then
 	export PYTHONSTARTUP=${HOME}/.pythonrc.py
@@ -101,4 +106,10 @@ eval "$(pyenv virtualenv-init -)"
 export RBENV_ROOT=${HOME}/.rbenv
 export PATH=${RBENV_ROOT}/bin:$PATH
 eval "$(rbenv init -)"
+
+# anyenv
+if [ -d $HOME/.anyenv ] ; then
+	export PATH="$HOME/.anyenv/bin:$PATH"
+    eval "$(anyenv init - zsh)"
+fi
 
