@@ -96,6 +96,11 @@ if [ -f ${HOME}/.pythonrc.py ]; then
 	export PYTHONSTARTUP=${HOME}/.pythonrc.py
 fi
 
+if [ -d $HOME/.anyenv ] ; then
+	export PATH="$HOME/.anyenv/bin:$PATH"
+    eval "$(anyenv init - zsh)"
+fi
+
 # pyenv
 export PYENV_ROOT=${HOME}/.pyenv
 export PATH=${PYENV_ROOT}/bin:$PATH
@@ -108,8 +113,3 @@ export PATH=${RBENV_ROOT}/bin:$PATH
 eval "$(rbenv init -)"
 
 # anyenv
-if [ -d $HOME/.anyenv ] ; then
-	export PATH="$HOME/.anyenv/bin:$PATH"
-    eval "$(anyenv init - zsh)"
-fi
-
