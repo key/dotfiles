@@ -23,6 +23,7 @@ done
 cask-packages=(
 	"pycharm",
 	"google-japanese-ime",
+	"google-chrome",
 	"OmniPlan",
 	"OmniGraffle"
 )
