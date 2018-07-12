@@ -91,6 +91,7 @@ fi
 export WORKON_HOME=${HOME}/Documents/virtualenv
 export PIP_DOWNLOAD_CACHE=~/.pip_cache
 export PIP_RESPECT_VIRTUALENV=true
+export PIPENV_VENV_IN_PROJECT=yes
 
 if [ -f ${HOME}/.pythonrc.py ]; then
 	export PYTHONSTARTUP=${HOME}/.pythonrc.py
@@ -99,21 +100,32 @@ fi
 # anyenv
 if [ -d $HOME/.anyenv ] ; then
 	export PATH="$HOME/.anyenv/bin:$PATH"
-    eval "$(anyenv init - zsh)"
+	eval "$(anyenv init - zsh)"
 fi
 
 # pyenv
-export PYENV_ROOT=${HOME}/.pyenv
-export PATH=${PYENV_ROOT}/bin:$PATH
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
+if [ -f /usr/local/bin/pyenv ]; then
+	export PYENV_ROOT=${HOME}/.pyenv
+	export PATH=${PYENV_ROOT}/bin:$PATH
+	eval "$(pyenv init -)"
+	eval "$(pyenv virtualenv-init -)"
+fi
 
 # rbenv
-export RBENV_ROOT=${HOME}/.rbenv
-export PATH=${RBENV_ROOT}/bin:$PATH
-eval "$(rbenv init -)"
+if [ -f /usr/local/bin/rbenv ]; then
+	export RBENV_ROOT=${HOME}/.rbenv
+	export PATH=${RBENV_ROOT}/bin:$PATH
+	eval "$(rbenv init -)"
+fi
 
 # goenv
-export GOENV_ROOT=${HOME}/.goenv
-export PATH=${GOENV_ROOT}/bin:$PATH
-eval "$(goenv init - zsh)"
+if [ -f /usr/local/bin/goenv ]; then
+	export GOPATH=$HOME/go
+	export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+	eval "$(goenv init -)"
+fi
+
+# fastlane
+if [ -d ~/.fastlane ]; then
+        export PATH="$HOME/.fastlane/bin:$PATH"
+fi
