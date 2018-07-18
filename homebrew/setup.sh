@@ -6,12 +6,20 @@
 
 ## Install packages
 packages=(
+	"dep",
+	"goenv",
+	"jq",
 	"pipenv",
 	"pyenv-virtualenv",
 	"pyenv-virtualenvwrapper",
 	"pyenv",
 	"zsh",
-	"postgresql"
+	"rbenv",
+	"rbenv-bundler",
+	"postgresql",
+
+	"rabbitmq",
+	"redis",
 )
 
 for p in ${packages[@]}; do
@@ -21,6 +29,7 @@ done
 
 ## Install packages from cask
 cask-packages=(
+	"atom",
 	"appcode",
 	"discord",
 	"pycharm",
@@ -28,6 +37,7 @@ cask-packages=(
 	"sublime-text",
 	"google-japanese-ime",
 	"google-chrome",
+	"vlc",
 	"OmniPlan",
 	"OmniGraffle",
 )
