@@ -1,0 +1,58 @@
+tap "homebrew/bundle"
+tap "homebrew/cask"
+tap "homebrew/cask-drivers"
+tap "homebrew/core"
+tap "homebrew/services"
+cask "java"
+brew "carthage"
+brew "dep"
+brew "goenv"
+brew "heroku"
+brew "jq"
+brew "lastpass-cli"
+brew "mas"
+brew "nodeenv"
+brew "pipenv"
+brew "postgresql"
+brew "pyenv"
+brew "pyenv-virtualenv"
+brew "pyenv-virtualenvwrapper"
+brew "rabbitmq", restart_service: true
+brew "rbenv"
+brew "rbenv-bundler"
+brew "redis", restart_service: true
+brew "sbt"
+brew "yarn"
+brew "zsh"
+cask "android-file-transfer"
+cask "appcode"
+cask "atom"
+cask "charles"
+cask "discord"
+cask "dropbox"
+cask "google-chrome"
+cask "google-japanese-ime"
+cask "intellij-idea"
+cask "iterm2"
+cask "omnigraffle"
+cask "omniplan"
+cask "pycharm"
+cask "silicon-labs-vcp-driver"
+cask "sourcetree"
+cask "sublime-text"
+cask "vlc"
+mas "1Password", id: 443987910
+mas "Cyberduck", id: 409222199
+mas "Day One", id: 1055511498
+mas "Divvy", id: 413857545
+mas "Evernote", id: 406056744
+mas "Garmin VIRB Edit", id: 703910885
+mas "GIPHY CAPTURE", id: 668208984
+mas "LastPass", id: 926036361
+mas "LINE", id: 539883307
+mas "Pocket", id: 568494494
+mas "Skitch", id: 425955336
+mas "Slack", id: 803453959
+mas "The Unarchiver", id: 425424353
+mas "Tweetbot", id: 1384080005
+mas "Xcode", id: 497799835
