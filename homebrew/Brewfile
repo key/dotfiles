@@ -13,14 +13,14 @@ brew "lastpass-cli"
 brew "mas"
 brew "nodeenv"
 brew "pipenv"
-brew "postgresql"
+brew "postgresql", start_service: true
 brew "pyenv"
 brew "pyenv-virtualenv"
 brew "pyenv-virtualenvwrapper"
-brew "rabbitmq", restart_service: true
+brew "rabbitmq", start_service: true
 brew "rbenv"
 brew "rbenv-bundler"
-brew "redis", restart_service: true
+brew "redis", start_service: true
 brew "sbt"
 brew "yarn"
 brew "zsh"
