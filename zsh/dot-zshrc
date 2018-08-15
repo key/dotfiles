@@ -125,7 +125,13 @@ if [ -f /usr/local/bin/goenv ]; then
 	eval "$(goenv init -)"
 fi
 
+# direnv
+if [ -f /usr/local/bin/direnv ]; then
+	eval "$(direnv hook zsh)"
+fi
+
 # fastlane
 if [ -d ~/.fastlane ]; then
         export PATH="$HOME/.fastlane/bin:$PATH"
 fi
+
