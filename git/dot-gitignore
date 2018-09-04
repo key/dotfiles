@@ -1,7 +1,0 @@
-# extensions
-*.sqlite3
-*.pyc
-
-# directory
-.idea/*
-
