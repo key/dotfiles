@@ -35,6 +35,7 @@ cask "dropbox"
 cask "docker"
 cask "google-chrome"
 cask "google-japanese-ime"
+cask "garmin-virb-edit"
 cask "intellij-idea"
 cask "iterm2"
 cask "omnigraffle"
@@ -44,12 +45,12 @@ cask "silicon-labs-vcp-driver"
 cask "sourcetree"
 cask "sublime-text"
 cask "vlc"
+cask "quik"
 mas "1Password", id: 443987910
 mas "Cyberduck", id: 409222199
 mas "Day One", id: 1055511498
 mas "Divvy", id: 413857545
 mas "Evernote", id: 406056744
-mas "Garmin VIRB Edit", id: 703910885
 mas "GIPHY CAPTURE", id: 668208984
 mas "LastPass", id: 926036361
 mas "LINE", id: 539883307
