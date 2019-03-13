@@ -50,7 +50,7 @@ unsetopt promptcr
 
 # setopt listtype
 
-export PATH=${HOME}/local/bin:/usr/local/bin:/usr/bin:/bin:/usr/X11R6/bin:/usr/local/sbin:/usr/sbin:/sbin
+export PATH=${HOME}/local/bin:/usr/local/bin:/usr/bin:/bin:/usr/X11R6/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/local/opt/gettext/bin
 export MANPATH=/usr/share/man:/usr/local/man:/usr/X11R6/man
 export LANG=ja_JP.UTF-8
 export EDITOR=vi
