@@ -8,7 +8,6 @@ brew "dep"
 brew "direnv"
 brew "goenv"
 brew "gettext"
-brew "heroku"
 brew "jq"
 brew "lastpass-cli"
 brew "mas"
@@ -43,6 +42,7 @@ cask "macdown"
 cask "omnigraffle"
 cask "omniplan"
 cask "pycharm"
+cask "rubymine"
 cask "silicon-labs-vcp-driver"
 cask "sourcetree"
 cask "sublime-text"
@@ -62,3 +62,4 @@ mas "Slack", id: 803453959
 mas "The Unarchiver", id: 425424353
 mas "Tweetbot", id: 1384080005
 mas "Xcode", id: 497799835
+mas "RunCat", id: 1429033973
