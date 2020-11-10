@@ -9,23 +9,18 @@ brew "direnv"
 brew "goenv"
 brew "gettext"
 brew "jq"
-brew "lastpass-cli"
 brew "mas"
 brew "nodeenv"
 brew "pipenv"
-brew "postgresql", start_service: true
 brew "pyenv"
 brew "pyenv-virtualenv"
 brew "pyenv-virtualenvwrapper"
 brew "rabbitmq", start_service: true
 brew "rbenv"
 brew "rbenv-bundler"
-brew "redis", start_service: true
-brew "sbt"
 brew "yarn"
 brew "zsh"
 brew "graphviz"
-brew "libmemcached"
 cask "android-file-transfer"
 cask "appcode"
 cask "atom"
@@ -48,18 +43,18 @@ cask "sourcetree"
 cask "sublime-text"
 cask "vlc"
 cask "quik"
+cask "zoomus"
 mas "1Password", id: 443987910
-mas "Cyberduck", id: 409222199
+# mas "Cyberduck", id: 409222199
 mas "Day One", id: 1055511498
 mas "Divvy", id: 413857545
 mas "Evernote", id: 406056744
 mas "GIPHY CAPTURE", id: 668208984
-mas "LastPass", id: 926036361
 mas "LINE", id: 539883307
 mas "Pocket", id: 568494494
 mas "Skitch", id: 425955336
 mas "Slack", id: 803453959
 mas "The Unarchiver", id: 425424353
 mas "Tweetbot", id: 1384080005
-mas "Xcode", id: 497799835
+# mas "Xcode", id: 497799835
 mas "RunCat", id: 1429033973
