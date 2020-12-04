@@ -29,7 +29,6 @@ brew "graphviz"
 brew "libmemcached"
 cask "android-file-transfer"
 cask "appcode"
-cask "atom"
 cask "charles"
 cask "discord"
 cask "dropbox"
@@ -48,17 +47,15 @@ cask "sourcetree"
 cask "sublime-text"
 cask "vlc"
 cask "quik"
-mas "1Password", id: 443987910
+mas "1Password", id: 1333542190
 mas "Cyberduck", id: 409222199
 mas "Day One", id: 1055511498
 mas "Divvy", id: 413857545
 mas "Evernote", id: 406056744
 mas "GIPHY CAPTURE", id: 668208984
-mas "LastPass", id: 926036361
-mas "LINE", id: 539883307
 mas "Pocket", id: 568494494
 mas "Skitch", id: 425955336
 mas "Slack", id: 803453959
 mas "The Unarchiver", id: 425424353
-mas "Tweetbot", id: 1384080005
+mas "TweetDeck", id: 485812721
 mas "Xcode", id: 497799835
