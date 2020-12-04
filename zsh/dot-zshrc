@@ -23,7 +23,7 @@ setopt extended_history
 fpath=(~/.zsh.d/ $fpath)
 fpath=($HOME/.anyenv/completions/ $fpath)
 fpath=(/usr/local/share/zsh/site-functions $fpath)
- 
+
 autoload -U compinit
 compinit -u
 
@@ -67,24 +67,24 @@ alias mv="mv -i"
 
 # create zsh.d if directory not exists.
 if [ ! -d $HOME/.zsh.d/ ]; then
-	echo "can't find ~/.zsh.d/"
-	echo 'so create that'
-	mkdir $HOME/.zsh.d/
+    echo "can't find ~/.zsh.d/"
+    echo 'so create that'
+    mkdir $HOME/.zsh.d/
 fi
 
 # editor
 if [ -f /usr/bin/vim ]; then
-        alias vi="vim"
+    alias vi=vim
 fi
 
 ##
 ## PATH setting
-## 
+##
 
 # PostgreSQL
 if [ -d /usr/local/pgsql/bin ]; then
-	export PATH=/usr/local/pgsql/bin:$PATH
-	export MANPATAH=/usr/local/pgsql/man:$MANPATH
+    export PATH=/usr/local/pgsql/bin:$PATH
+    export MANPATAH=/usr/local/pgsql/man:$MANPATH
 fi
 
 # python
@@ -94,44 +94,48 @@ export PIP_RESPECT_VIRTUALENV=true
 export PIPENV_VENV_IN_PROJECT=yes
 
 if [ -f ${HOME}/.pythonrc.py ]; then
-	export PYTHONSTARTUP=${HOME}/.pythonrc.py
+    export PYTHONSTARTUP=${HOME}/.pythonrc.py
 fi
 
 # anyenv
 if [ -d $HOME/.anyenv ] ; then
-	export PATH="$HOME/.anyenv/bin:$PATH"
-	eval "$(anyenv init - zsh)"
+    export PATH="$HOME/.anyenv/bin:$PATH"
+    eval "$(anyenv init - zsh)"
 fi
 
 # pyenv
 if [ -f /usr/local/bin/pyenv ]; then
-	export PYENV_ROOT=${HOME}/.pyenv
-	export PATH=${PYENV_ROOT}/bin:$PATH
-	eval "$(pyenv init -)"
-	eval "$(pyenv virtualenv-init -)"
+    export PYENV_ROOT=${HOME}/.pyenv
+    export PATH=${PYENV_ROOT}/bin:$PATH
+    eval "$(pyenv init -)"
+    eval "$(pyenv virtualenv-init -)"
 fi
 
 # rbenv
 if [ -f /usr/local/bin/rbenv ]; then
-	export RBENV_ROOT=${HOME}/.rbenv
-	export PATH=${RBENV_ROOT}/bin:$PATH
-	eval "$(rbenv init -)"
+    export RBENV_ROOT=${HOME}/.rbenv
+    export PATH=${RBENV_ROOT}/bin:$PATH
+    eval "$(rbenv init -)"
 fi
 
 # goenv
 if [ -f /usr/local/bin/goenv ]; then
-	export GOPATH=$HOME/go
-	export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
-	eval "$(goenv init -)"
+    export GOPATH=$HOME/go
+    export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+    eval "$(goenv init -)"
 fi
 
 # direnv
 if [ -f /usr/local/bin/direnv ]; then
-	eval "$(direnv hook zsh)"
+    eval "$(direnv hook zsh)"
 fi
 
 # fastlane
 if [ -d ~/.fastlane ]; then
-        export PATH="$HOME/.fastlane/bin:$PATH"
+    export PATH="$HOME/.fastlane/bin:$PATH"
 fi
 
+# aws cli v1
+if [ -d /usr/local/opt/awscli@1/bin ]; then
+    alias awsv1=/usr/local/opt/awscli@1/bin/aws
+fi
