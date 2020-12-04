@@ -22,7 +22,10 @@ setopt extended_history
 # zsh-completionsの設定
 fpath=(~/.zsh.d/ $fpath)
 fpath=($HOME/.anyenv/completions/ $fpath)
-fpath=(/usr/local/share/zsh/site-functions $fpath)
+
+if [ -d /usr/local/share/zsh/site-functions]; then
+    fpath=(/usr/local/share/zsh/site-functions $fpath)
+fi
 
 autoload -U compinit
 compinit -u
@@ -40,30 +43,15 @@ precmd () {
 }
 
 PROMPT="%{${fg[yellow]}%}[%n@%m%1(v|%F{green}%1v%f|)%{${fg[yellow]}%}]%{${reset_color}%}%b "
-# PROMPT='$USER@%m%%%u '
-# PROMPT='$USER@'`hostname -s`'%%%u '
 RPROMPT='[%~]'
 setopt prompt_subst
 unsetopt promptcr
 
-#autoload -U sshsocket
-
-# setopt listtype
-
-export PATH=${HOME}/local/bin:/usr/local/bin:/usr/bin:/bin:/usr/X11R6/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/local/opt/gettext/bin
-export MANPATH=/usr/share/man:/usr/local/man:/usr/X11R6/man
+export PATH=${HOME}/local/bin:/usr/local/bin:/usr/bin:/bin:/usr/X11R6/bin:/usr/local/sbin:/usr/sbin:/sbin
+export MANPATH=/usr/local/man:/usr/X11R6/man:/usr/share/man
 export LANG=ja_JP.UTF-8
 export EDITOR=vi
 export RSYNC_SSH=ssh
-
-alias rgrep="grep -r"
-alias less="less -R"
-alias ll="ls -l"
-alias la="ls -a"
-alias rm="rm -i"
-alias cp="cp -i"
-alias mv="mv -i"
-#alias ssh='SSH_AUTH_SOCK=`sshsocket` ssh'
 
 # create zsh.d if directory not exists.
 if [ ! -d $HOME/.zsh.d/ ]; then
@@ -72,7 +60,13 @@ if [ ! -d $HOME/.zsh.d/ ]; then
     mkdir $HOME/.zsh.d/
 fi
 
-# editor
+alias rgrep="grep -r"
+alias less="less -R"
+alias ll="ls -l"
+alias la="ls -a"
+alias rm="rm -i"
+alias cp="cp -i"
+alias mv="mv -i"
 if [ -f /usr/bin/vim ]; then
     alias vi=vim
 fi
