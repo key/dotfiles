@@ -1,3 +1,4 @@
+brew "awscli@1"
 brew "direnv"
 brew "gettext"
 brew "goenv"
@@ -7,6 +8,7 @@ brew "libmemcached"
 brew "mas"
 brew "nodeenv"
 brew "pipenv"
+brew "pre-commit"
 brew "pyenv"
 brew "pyenv-virtualenv"
 brew "pyenv-virtualenvwrapper"
@@ -27,18 +29,19 @@ cask "iterm2"
 cask "macdown"
 cask "omnigraffle"
 cask "pycharm"
-cask "quik"
+cask "rubymine"
 cask "silicon-labs-vcp-driver"
 cask "sourcetree"
 cask "sublime-text"
 cask "vlc"
+cask "zoomus"
 mas "1Password", id: 1333542190
-mas "Cyberduck", id: 409222199
 mas "Day One", id: 1055511498
 mas "Divvy", id: 413857545
 mas "Evernote", id: 406056744
 mas "GIPHY CAPTURE", id: 668208984
 mas "Pocket", id: 568494494
+mas "RunCat", id: 1429033973
 mas "Skitch", id: 425955336
 mas "Slack", id: 803453959
 mas "The Unarchiver", id: 425424353
