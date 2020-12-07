@@ -15,24 +15,14 @@ HISTFILE=$HOME/.zsh-history
 HISTSIZE=100000
 SAVEHIST=100000
 
-setopt share_history
-setopt hist_ignore_dups
 setopt extended_history
-
-# zsh-completionsの設定
-fpath=(~/.zsh.d/ $fpath)
-fpath=($HOME/.anyenv/completions/ $fpath)
-
-if [ -d /usr/local/share/zsh/site-functions ]; then
-    fpath=(/usr/local/share/zsh/site-functions $fpath)
-fi
-
-autoload -U compinit
-compinit -u
+setopt hist_ignore_dups
+setopt prompt_subst
+setopt share_history
+unsetopt promptcr
 
 autoload history-search-end
 autoload -U colors; colors
-autoload -U compinit; compinit
 autoload -Uz vcs_info
 zstyle ':vcs_info:*' formats ':(%s)%b'
 zstyle ':vcs_info:*' actionformats ':(%s)%b|%a'
@@ -42,23 +32,13 @@ precmd () {
     [[ -n "$vcs_info_msg_0_" ]] && psvar[1]="$vcs_info_msg_0_"
 }
 
-PROMPT="%{${fg[yellow]}%}[%n@%m%1(v|%F{green}%1v%f|)%{${fg[yellow]}%}]%{${reset_color}%}%b "
-RPROMPT='[%~]'
-setopt prompt_subst
-unsetopt promptcr
-
+export PROMPT="%{${fg[yellow]}%}[%n@%m%1(v|%F{green}%1v%f|)%{${fg[yellow]}%}]%{${reset_color}%}%b "
+export RPROMPT='[%~]'
 export PATH=${HOME}/local/bin:/usr/local/bin:/usr/bin:/bin:/usr/X11R6/bin:/usr/local/sbin:/usr/sbin:/sbin
-export MANPATH=/usr/local/man:/usr/X11R6/man:/usr/share/man
+export MANPATH=${HOME}/local/man:/usr/local/man:/usr/X11R6/man:/usr/share/man
 export LANG=ja_JP.UTF-8
 export EDITOR=vi
 export RSYNC_SSH=ssh
-
-# create zsh.d if directory not exists.
-if [ ! -d $HOME/.zsh.d/ ]; then
-    echo "can't find ~/.zsh.d/"
-    echo 'so create that'
-    mkdir $HOME/.zsh.d/
-fi
 
 alias rgrep="grep -r"
 alias less="less -R"
@@ -69,6 +49,17 @@ alias cp="cp -i"
 alias mv="mv -i"
 if [ -f /usr/bin/vim ]; then
     alias vi=vim
+fi
+
+# zsh
+if [ ! -d $HOME/.zsh.d/ ]; then
+    echo "can't find ~/.zsh.d/! so create that"
+    mkdir $HOME/.zsh.d/
+    fpath=(~/.zsh.d/ $fpath)
+fi
+if [ -d /usr/local/share/zsh/site-functions ]; then
+    chmod 755 /usr/local/share/zsh /usr/local/share/zsh/site-functions
+    fpath=(/usr/local/share/zsh/site-functions $fpath)
 fi
 
 ##
@@ -95,6 +86,7 @@ fi
 if [ -d $HOME/.anyenv ] ; then
     export PATH="$HOME/.anyenv/bin:$PATH"
     eval "$(anyenv init - zsh)"
+    fpath=($HOME/.anyenv/completions/ $fpath)
 fi
 
 # pyenv
@@ -133,3 +125,5 @@ fi
 if [ -d /usr/local/opt/awscli@1/bin ]; then
     alias awsv1=/usr/local/opt/awscli@1/bin/aws
 fi
+
+autoload -U compinit; compinit
