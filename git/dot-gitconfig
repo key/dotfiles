@@ -1,0 +1,5 @@
+[core]
+    excludesfile = /Users/key/.gitignore_global
+[user]
+    email = mitsukuni.sato@gmail.com
+    name = key
