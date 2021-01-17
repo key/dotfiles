@@ -1,3 +1,10 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 bindkey -e
 
 # M-f/M-bの挙動をEmacsのそれに合わせる（実はM-bは元々同じだけど一応）
@@ -17,7 +24,7 @@ SAVEHIST=100000
 
 setopt extended_history
 setopt hist_ignore_dups
-setopt prompt_subst
+setopt PROMPT_SUBST
 setopt share_history
 unsetopt promptcr
 
@@ -32,8 +39,6 @@ precmd () {
     [[ -n "$vcs_info_msg_0_" ]] && psvar[1]="$vcs_info_msg_0_"
 }
 
-export PROMPT="%{${fg[yellow]}%}[%n@%m%1(v|%F{green}%1v%f|)%{${fg[yellow]}%}]%{${reset_color}%}%b "
-export RPROMPT='[%~]'
 export PATH=${HOME}/local/bin:/usr/local/bin:/usr/bin:/bin:/usr/X11R6/bin:/usr/local/sbin:/usr/sbin:/sbin
 export MANPATH=${HOME}/local/man:/usr/local/man:/usr/X11R6/man:/usr/share/man
 export LANG=ja_JP.UTF-8
@@ -127,3 +132,13 @@ if [ -d /usr/local/opt/awscli@1/bin ]; then
 fi
 
 autoload -U compinit; compinit
+
+# plugin
+plugins=(virtualenv)
+
+# powerlevel10k
+source /usr/local/opt/powerlevel10k/powerlevel10k.zsh-theme
+POWERLEVEL10K_RIGHT_PROMPT_ELEMENTS=(status virtualenv)
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
