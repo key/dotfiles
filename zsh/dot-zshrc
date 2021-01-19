@@ -5,6 +5,11 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+# homebrew
+if [ -f /opt/homebrew/bin/brew ]; then
+    eval $(/opt/homebrew/bin/brew shellenv)
+fi
+
 bindkey -e
 
 # M-f/M-bの挙動をEmacsのそれに合わせる（実はM-bは元々同じだけど一応）
@@ -39,8 +44,6 @@ precmd () {
     [[ -n "$vcs_info_msg_0_" ]] && psvar[1]="$vcs_info_msg_0_"
 }
 
-export PATH=${HOME}/local/bin:/usr/local/bin:/usr/bin:/bin:/usr/X11R6/bin:/usr/local/sbin:/usr/sbin:/sbin
-export MANPATH=${HOME}/local/man:/usr/local/man:/usr/X11R6/man:/usr/share/man
 export LANG=ja_JP.UTF-8
 export EDITOR=vi
 export RSYNC_SSH=ssh
@@ -62,19 +65,23 @@ if [ ! -d $HOME/.zsh.d/ ]; then
     mkdir $HOME/.zsh.d/
     fpath=(~/.zsh.d/ $fpath)
 fi
-if [ -d /usr/local/share/zsh/site-functions ]; then
-    chmod 755 /usr/local/share/zsh /usr/local/share/zsh/site-functions
-    fpath=(/usr/local/share/zsh/site-functions $fpath)
+if [ -d ${HOMEBREW_PREFIX}/share/zsh/site-functions ]; then
+    chmod 755 ${HOMEBREW_PREFIX}/share/zsh ${HOMEBREW_PREFIX}/share/zsh/site-functions
+    fpath=(${HOMEBREW_PREFIX}/share/zsh/site-functions $fpath)
 fi
 
 ##
 ## PATH setting
 ##
 
+# base path
+export PATH=${HOME}/local/bin:${PATH}
+export MANPATH=${HOME}/local/man:${MANPATH}:/usr/local/man:/usr/X11R6/man:/usr/share/man
+
 # PostgreSQL
-if [ -d /usr/local/pgsql/bin ]; then
-    export PATH=/usr/local/pgsql/bin:$PATH
-    export MANPATAH=/usr/local/pgsql/man:$MANPATH
+if [ -d ${HOMEBREW_PREFIX}/pgsql/bin ]; then
+    export PATH=${HOMEBREW_PREFIX}/pgsql/bin:$PATH
+    export MANPATAH=${HOMEBREW_PREFIX}/pgsql/man:$MANPATH
 fi
 
 # python
@@ -95,29 +102,29 @@ if [ -d $HOME/.anyenv ] ; then
 fi
 
 # pyenv
-if [ -f /usr/local/bin/pyenv ]; then
+if [ -f ${HOMEBREW_PREFIX}/bin/pyenv ]; then
     export PYENV_ROOT=${HOME}/.pyenv
     export PATH=${PYENV_ROOT}/bin:$PATH
     eval "$(pyenv init -)"
-    eval "$(pyenv virtualenv-init -)"
+    # eval "$(pyenv virtualenv-init -)"
 fi
 
 # rbenv
-if [ -f /usr/local/bin/rbenv ]; then
+if [ -f ${HOMEBREW_PREFIX}/bin/rbenv ]; then
     export RBENV_ROOT=${HOME}/.rbenv
     export PATH=${RBENV_ROOT}/bin:$PATH
     eval "$(rbenv init -)"
 fi
 
 # goenv
-if [ -f /usr/local/bin/goenv ]; then
+if [ -f ${HOMEBREW_PREFIX}/bin/goenv ]; then
     export GOPATH=$HOME/go
     export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
     eval "$(goenv init -)"
 fi
 
 # direnv
-if [ -f /usr/local/bin/direnv ]; then
+if [ -f ${HOMEBREW_PREFIX}/bin/direnv ]; then
     eval "$(direnv hook zsh)"
 fi
 
@@ -137,8 +144,10 @@ autoload -U compinit; compinit
 plugins=(virtualenv)
 
 # powerlevel10k
-source /usr/local/opt/powerlevel10k/powerlevel10k.zsh-theme
-POWERLEVEL10K_RIGHT_PROMPT_ELEMENTS=(status virtualenv)
+if [ -f ${HOMEBREW_PREFIX}/opt/powerlevel10k/powerlevel10k.zsh-theme ]; then
+    source ${HOMEBREW_PREFIX}/opt/powerlevel10k/powerlevel10k.zsh-theme
+    POWERLEVEL10K_RIGHT_PROMPT_ELEMENTS=(status virtualenv)
+fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
