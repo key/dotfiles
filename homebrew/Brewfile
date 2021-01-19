@@ -19,10 +19,12 @@ brew "pyenv-virtualenv"
 brew "pyenv-virtualenvwrapper"
 brew "rbenv"
 brew "rbenv-bundler"
+brew "terraform"
 brew "yarn"
 cask "1password"
 cask "appcode"
 cask "charles"
+cask "deepl"
 cask "discord"
 cask "docker"
 cask "garmin-virb-edit"
@@ -43,6 +45,7 @@ mas "Day One", id: 1055511498
 mas "Divvy", id: 413857545
 mas "Evernote", id: 406056744
 mas "GIPHY CAPTURE", id: 668208984
+mas "Lifeline", id: 1526186940
 mas "Pocket", id: 568494494
 mas "RunCat", id: 1429033973
 mas "Skitch", id: 425955336
