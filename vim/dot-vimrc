@@ -21,9 +21,11 @@ syntax enable
 
 " tab
 set list listchars=tab:\▸\-
-" set expandtab
-set tabstop=2
-set shiftwidth=2
+set expandtab
+set tabstop=4
+set shiftwidth=4
+set autoindent
+set smartindent
 
 " search
 set ignorecase
@@ -32,4 +34,3 @@ set incsearch
 set wrapscan
 set hlsearch
 nmap <Esc><Esc> :nohlsearch<CR><Esc>
-
