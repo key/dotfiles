@@ -1,8 +1,10 @@
 tap "homebrew/bundle"
 tap "homebrew/cask"
 tap "homebrew/cask-drivers"
+tap "homebrew/cask-fonts"
 tap "homebrew/core"
 tap "homebrew/services"
+tap "romkatv/powerlevel10k"
 brew "awscli"
 brew "direnv"
 brew "goenv"
@@ -13,13 +15,15 @@ brew "libpq"
 brew "mas"
 brew "nodeenv"
 brew "pipenv"
+brew "powerlevel10k"
 brew "pre-commit"
 brew "pyenv"
 brew "pyenv-virtualenv"
 brew "pyenv-virtualenvwrapper"
 brew "rbenv"
 brew "rbenv-bundler"
-brew "terraform"
+brew "slack"
+brew "tfenv"
 brew "yarn"
 cask "1password"
 cask "appcode"
@@ -27,6 +31,7 @@ cask "charles"
 cask "deepl"
 cask "discord"
 cask "docker"
+cask "font-source-code-pro"
 cask "garmin-virb-edit"
 cask "google-chrome"
 cask "google-japanese-ime"
@@ -49,7 +54,6 @@ mas "Lifeline", id: 1526186940
 mas "Pocket", id: 568494494
 mas "RunCat", id: 1429033973
 mas "Skitch", id: 425955336
-mas "Slack", id: 803453959
 mas "The Unarchiver", id: 425424353
 mas "TweetDeck", id: 485812721
 mas "Xcode", id: 497799835
