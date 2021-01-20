@@ -61,17 +61,6 @@ if [ -f /usr/bin/vim ]; then
     alias vi=vim
 fi
 
-# zsh
-if [ ! -d $HOME/.zsh.d/ ]; then
-    echo "can't find ~/.zsh.d/! so create that"
-    mkdir $HOME/.zsh.d/
-    fpath=(~/.zsh.d/ $fpath)
-fi
-if [ -d ${HOMEBREW_PREFIX}/share/zsh/site-functions ]; then
-    chmod 755 ${HOMEBREW_PREFIX}/share/zsh ${HOMEBREW_PREFIX}/share/zsh/site-functions
-    fpath=(${HOMEBREW_PREFIX}/share/zsh/site-functions $fpath)
-fi
-
 ##
 ## PATH setting
 ##
