@@ -8,6 +8,8 @@ fi
 # homebrew
 if [ -f /opt/homebrew/bin/brew ]; then
     eval $(/opt/homebrew/bin/brew shellenv)
+elif [ -f /usr/local/bin/brew ]; then
+    eval $(/usr/local/bin/brew shellenv)
 fi
 
 bindkey -e
@@ -94,32 +96,21 @@ if [ -f ${HOME}/.pythonrc.py ]; then
     export PYTHONSTARTUP=${HOME}/.pythonrc.py
 fi
 
-# anyenv
-if [ -d $HOME/.anyenv ] ; then
-    export PATH="$HOME/.anyenv/bin:$PATH"
-    eval "$(anyenv init - zsh)"
-    fpath=($HOME/.anyenv/completions/ $fpath)
-fi
-
 # pyenv
 if [ -f ${HOMEBREW_PREFIX}/bin/pyenv ]; then
     export PYENV_ROOT=${HOME}/.pyenv
-    export PATH=${PYENV_ROOT}/bin:$PATH
     eval "$(pyenv init -)"
-    # eval "$(pyenv virtualenv-init -)"
 fi
 
 # rbenv
 if [ -f ${HOMEBREW_PREFIX}/bin/rbenv ]; then
     export RBENV_ROOT=${HOME}/.rbenv
-    export PATH=${RBENV_ROOT}/bin:$PATH
     eval "$(rbenv init -)"
 fi
 
 # goenv
 if [ -f ${HOMEBREW_PREFIX}/bin/goenv ]; then
     export GOPATH=$HOME/go
-    export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
     eval "$(goenv init -)"
 fi
 
