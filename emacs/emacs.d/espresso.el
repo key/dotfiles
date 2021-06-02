@@ -1725,14 +1725,14 @@ a comma)."
     (back-to-indentation)
     (or (espresso--looking-at-operator-p)
         (and (espresso--re-search-backward "\n" nil t)
-	     (progn
-	       (skip-chars-backward " \t")
-	       (or (bobp) (backward-char))
-	       (and (> (point) (point-min))
+         (progn
+           (skip-chars-backward " \t")
+           (or (bobp) (backward-char))
+           (and (> (point) (point-min))
                     (save-excursion (backward-char) (not (looking-at "[/*]/")))
                     (espresso--looking-at-operator-p)
-		    (and (progn (backward-char)
-				(not (looking-at "++\\|--\\|/[/*]"))))))))))
+            (and (progn (backward-char)
+                (not (looking-at "++\\|--\\|/[/*]"))))))))))
 
 
 (defun espresso--end-of-do-while-loop-p ()
@@ -1744,20 +1744,20 @@ indented to the same column as the current line."
   (save-excursion
     (save-match-data
       (when (looking-at "\\s-*\\_<while\\_>")
-	(if (save-excursion
-	      (skip-chars-backward "[ \t\n]*}")
-	      (looking-at "[ \t\n]*}"))
-	    (save-excursion
-	      (backward-list) (forward-symbol -1) (looking-at "\\_<do\\_>"))
-	  (espresso--re-search-backward "\\_<do\\_>" (point-at-bol) t)
-	  (or (looking-at "\\_<do\\_>")
-	      (let ((saved-indent (current-indentation)))
-		(while (and (espresso--re-search-backward "^\\s-*\\_<" nil t)
-			    (/= (current-indentation) saved-indent)))
-		(and (looking-at "\\s-*\\_<do\\_>")
-		     (not (espresso--re-search-forward
-			   "\\_<while\\_>" (point-at-eol) t))
-		     (= (current-indentation) saved-indent)))))))))
+    (if (save-excursion
+          (skip-chars-backward "[ \t\n]*}")
+          (looking-at "[ \t\n]*}"))
+        (save-excursion
+          (backward-list) (forward-symbol -1) (looking-at "\\_<do\\_>"))
+      (espresso--re-search-backward "\\_<do\\_>" (point-at-bol) t)
+      (or (looking-at "\\_<do\\_>")
+          (let ((saved-indent (current-indentation)))
+        (while (and (espresso--re-search-backward "^\\s-*\\_<" nil t)
+                (/= (current-indentation) saved-indent)))
+        (and (looking-at "\\s-*\\_<do\\_>")
+             (not (espresso--re-search-forward
+               "\\_<while\\_>" (point-at-eol) t))
+             (= (current-indentation) saved-indent)))))))))
 
 
 (defun espresso--ctrl-statement-indentation ()
@@ -3340,8 +3340,8 @@ Key bindings:
   (set (make-local-variable 'open-paren-in-column-0-is-defun-start) nil)
   (set (make-local-variable 'font-lock-defaults)
        (list espresso--font-lock-keywords
-	     nil nil nil nil
-	     '(font-lock-syntactic-keywords
+         nil nil nil nil
+         '(font-lock-syntactic-keywords
                . espresso--font-lock-syntactic-keywords)))
 
   (set (make-local-variable 'parse-sexp-ignore-comments) t)

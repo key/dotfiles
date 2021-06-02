@@ -71,7 +71,7 @@
 ;; After tabbing past all of the fields, point is moved to the end of
 ;; the snippet, unless the user has specified a place within the
 ;; template with the `snippet-exit-identifier' ("$." by default).  For
-;; example: 
+;; example:
 
 ;;   if ($${test} {
 ;;       $.
@@ -111,7 +111,7 @@
 ;;                  "for"                     ; name
 ;;                  ""                        ; expansion
 ;;                  '(lambda ()               ; expansion hook
-;;                     (snippet-insert 
+;;                     (snippet-insert
 ;;                      "for $${element} in $${sequence}:")))
 
 ;; The above example does not work as expected because after the
@@ -173,7 +173,7 @@
 ;;                         text-mode-abbrev-table
 ;;                       python-mode-abbrev-table)))
 ;;             nil t)))
- 
+
 ;;; Implementation Notes:
 
 ;; This is my first significant chunk of elisp code.  I have very
@@ -228,7 +228,7 @@
 
 (require 'cl)
 
-(defgroup snippet nil 
+(defgroup snippet nil
   "Insert a template with fields that con contain optional defaults."
   :prefix "snippet-"
   :group 'abbrev
@@ -282,7 +282,7 @@
 (define-key snippet-map (kbd "<S-tab>")         'snippet-prev-field)
 (define-key snippet-map (kbd "<S-iso-lefttab>") 'snippet-prev-field)
 
-(defstruct snippet 
+(defstruct snippet
   "Structure containing the overlays used to display a snippet.
 
 The BOUND slot contains an overlay to bound the entire text of the
@@ -319,7 +319,7 @@ deleted."
     bound))
 
 (defun snippet-make-field-overlay (&optional name)
-  "Create an overlay for a field in a snippet.  
+  "Create an overlay for a field in a snippet.
 Add the appropriate properties for the overlay to provide: a face used
 to display a field's default value, and modification hooks to remove
 the default text if the user starts typing."
@@ -336,7 +336,7 @@ the default text if the user starts typing."
 
 (defun snippet-fields-with-name (name)
   "Return a list of fields whose name property is equal to NAME."
-  (loop for field in (snippet-fields snippet) 
+  (loop for field in (snippet-fields snippet)
         when (eq name (overlay-get field 'name))
         collect field))
 
@@ -379,7 +379,7 @@ responsible for updating all other fields that share a common name."
         (inhibit-modification-hooks t))
     (when (and name after)
       (save-excursion
-        (dolist (like-field (set-difference (snippet-fields-with-name name) 
+        (dolist (like-field (set-difference (snippet-fields-with-name name)
                                             (list field)))
           (goto-char (overlay-start like-field))
           (delete-region (overlay-start like-field)
@@ -419,7 +419,7 @@ and the snippet reverts to normal text."
   (interactive)
   (let* ((bound (snippet-bound snippet))
          (fields (snippet-fields snippet))
-         (exit (snippet-exit-marker snippet))         
+         (exit (snippet-exit-marker snippet))
          (prev-pos (loop for field in (reverse fields)
                          for start = (overlay-start field)
                          when (> (point) start) return start)))
@@ -473,7 +473,7 @@ list if INCLUDE-SEPARATORS-P is non-nil."
           (regexp-quote snippet-indent)))
 
 (defun snippet-insert (template)
-  "Insert a snippet into the current buffer at point.  
+  "Insert a snippet into the current buffer at point.
 TEMPLATE is a string that may optionally contain fields which are
 specified by `snippet-field-identifier'.  Fields may optionally also
 include default values delimited by `snippet-field-default-beg-char'
@@ -523,36 +523,36 @@ more information."
     ;; Step 3: Insert the exit marker so we know where to move point
     ;; to when user is done with snippet.  If they did not specify
     ;; where point should land, set the exit marker to the end of the
-    ;; snippet. 
+    ;; snippet.
     (goto-char (overlay-start (snippet-bound snippet)))
     (while (re-search-forward (regexp-quote snippet-exit-identifier)
-                              (overlay-end (snippet-bound snippet)) 
+                              (overlay-end (snippet-bound snippet))
                               t)
       (replace-match "")
       (setf (snippet-exit-marker snippet) (point-marker)))
-    
+
     (unless (snippet-exit-marker snippet)
       (let ((end (overlay-end (snippet-bound snippet))))
         (goto-char (if (= end (point-max)) end (1- end))))
       (setf (snippet-exit-marker snippet) (point-marker)))
-  
+
     (set-marker-insertion-type (snippet-exit-marker snippet) t)
 
     ;; Step 4: Create field overlays for each field and insert any
     ;; default values for the field.
     (goto-char (overlay-start (snippet-bound snippet)))
     (while (re-search-forward (snippet-field-regexp)
-                              (overlay-end (snippet-bound snippet)) 
+                              (overlay-end (snippet-bound snippet))
                               t)
       (let ((field (snippet-make-field-overlay (match-string 2)))
             (start (match-beginning 0)))
         (push field (snippet-fields snippet))
         (replace-match (if (match-beginning 2) "\\2" ""))
         (move-overlay field start (point))))
-    
+
     ;; These are reversed so they are in order of how they appeared in
     ;; the template as we index into this list when cycling field to
-    ;; field. 
+    ;; field.
     (setf (snippet-fields snippet) (reverse (snippet-fields snippet))))
 
   ;; Step 5: Position the point at the first field or the end of the
@@ -579,12 +579,12 @@ The function name is composed of \"snippet-abbrev-\", the abbrev table
 name, and the name of the abbrev.  If the abbrev table name ends in
 \"-abbrev-table\", it is stripped."
   (let ((abbrev-expansion (intern
-                           (concat "snippet-abbrev-" 
+                           (concat "snippet-abbrev-"
                                    (snippet-strip-abbrev-table-suffix
                                     (symbol-name abbrev-table))
                                    "-"
                                    abbrev-name))))
-    (fset abbrev-expansion 
+    (fset abbrev-expansion
           `(lambda ()
              ,(format (concat "Abbrev expansion hook for \"%s\".\n"
                               "Expands to the following snippet:\n\n%s")

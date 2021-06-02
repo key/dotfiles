@@ -1720,17 +1720,17 @@ Any text properties changes happen as usual but the changes are not treated as
 modifications to the buffer."
   (let ((modified (make-symbol "modified")))
     `(let ((,modified (buffer-modified-p))
-	   (inhibit-read-only t)
-	   (inhibit-modification-hooks t)
-	   (buffer-undo-list t)
-	   (deactivate-mark nil)
-	   ;; Apparently these avoid file locking problems.
-	   (buffer-file-name nil)
-	   (buffer-file-truename nil))
+       (inhibit-read-only t)
+       (inhibit-modification-hooks t)
+       (buffer-undo-list t)
+       (deactivate-mark nil)
+       ;; Apparently these avoid file locking problems.
+       (buffer-file-name nil)
+       (buffer-file-truename nil))
        (unwind-protect
-	   (progn ,@body)
-	 (unless ,modified
-	   (restore-buffer-modified-p nil))))))
+       (progn ,@body)
+     (unless ,modified
+       (restore-buffer-modified-p nil))))))
 
 (put 'js2-with-unmodifying-text-property-changes 'lisp-indent-function 0)
 (def-edebug-spec js2-with-unmodifying-text-property-changes t)
@@ -1754,9 +1754,9 @@ BUF can be a buffer name or a buffer object.
 If the buffer doesn't exist, it's created."
   `(let ((buffer (gentemp)))
     (setq buffer
-	  (if (stringp ,buf)
-	      (get-buffer-create ,buf)
-	    ,buf))
+      (if (stringp ,buf)
+          (get-buffer-create ,buf)
+        ,buf))
     (save-excursion
       (set-buffer buffer)
       ,form)))
@@ -10167,12 +10167,12 @@ a comma)."
     (back-to-indentation)
     (or (js-looking-at-operator-p)
         (and (js-re-search-backward "\n" nil t)
-	     (progn
-	       (skip-chars-backward " \t")
-	       (backward-char)
-	       (and (js-looking-at-operator-p)
-		    (and (progn (backward-char)
-				(not (looking-at "\\*\\|++\\|--\\|/[/*]"))))))))))
+         (progn
+           (skip-chars-backward " \t")
+           (backward-char)
+           (and (js-looking-at-operator-p)
+            (and (progn (backward-char)
+                (not (looking-at "\\*\\|++\\|--\\|/[/*]"))))))))))
 
 (defun js-end-of-do-while-loop-p ()
   "Returns non-nil if word after point is `while' of a do-while
@@ -10183,20 +10183,20 @@ indented to the same column as the current line."
   (save-excursion
     (save-match-data
       (when (looking-at "\\s-*\\<while\\>")
-	(if (save-excursion
-	      (skip-chars-backward "[ \t\n]*}")
-	      (looking-at "[ \t\n]*}"))
-	    (save-excursion
-	      (backward-list) (backward-word 1) (looking-at "\\<do\\>"))
-	  (js-re-search-backward "\\<do\\>" (point-at-bol) t)
-	  (or (looking-at "\\<do\\>")
-	      (let ((saved-indent (current-indentation)))
-		(while (and (js-re-search-backward "^[ \t]*\\<" nil t)
-			    (/= (current-indentation) saved-indent)))
-		(and (looking-at "[ \t]*\\<do\\>")
-		     (not (js-re-search-forward
-			   "\\<while\\>" (point-at-eol) t))
-		     (= (current-indentation) saved-indent)))))))))
+    (if (save-excursion
+          (skip-chars-backward "[ \t\n]*}")
+          (looking-at "[ \t\n]*}"))
+        (save-excursion
+          (backward-list) (backward-word 1) (looking-at "\\<do\\>"))
+      (js-re-search-backward "\\<do\\>" (point-at-bol) t)
+      (or (looking-at "\\<do\\>")
+          (let ((saved-indent (current-indentation)))
+        (while (and (js-re-search-backward "^[ \t]*\\<" nil t)
+                (/= (current-indentation) saved-indent)))
+        (and (looking-at "[ \t]*\\<do\\>")
+             (not (js-re-search-forward
+               "\\<while\\>" (point-at-eol) t))
+             (= (current-indentation) saved-indent)))))))))
 
 (defun js-ctrl-statement-indentation ()
   "Returns the proper indentation of the current line if it

@@ -2,6 +2,6 @@
 username = Mitsukuni Sato <mitsukuni.sato@gmail.com>
 
 [extensions]
-color = 
-pager = 
-hgext.graphlog = 
+color =
+pager =
+hgext.graphlog =

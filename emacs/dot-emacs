@@ -25,21 +25,21 @@
                (font-lock-fontify-buffer))))
 
 (autoload 'ansi-color-for-comint-mode-on "ansi-color"
-	     "Set `ansi-color-for-comint-mode' to t." t)
+         "Set `ansi-color-for-comint-mode' to t." t)
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 
 (setq default-frame-alist
       (append (list '(foreground-color . "azure3")
-		    '(background-color . "black")
-		    '(border-color . "black")
-		    '(mouse-color . "white")
-		    '(cursor-color . "white")
-		    '(width . 175)
-		    '(height . 47)
-		    '(top . 0)
-		    '(left . 0)
-		    '(alpha . (85 60)))    ;;ここ
-		    default-frame-alist))
+            '(background-color . "black")
+            '(border-color . "black")
+            '(mouse-color . "white")
+            '(cursor-color . "white")
+            '(width . 175)
+            '(height . 47)
+            '(top . 0)
+            '(left . 0)
+            '(alpha . (85 60)))    ;;ここ
+            default-frame-alist))
 
 ;;; アウトラインモード(php)
  (add-hook
@@ -160,12 +160,12 @@
 
 (setq php-manual-url "http://www.php.net/manual/ja/")
 (add-hook 'php-mode-user-hook
-	  '(lambda ()
-	     (progn
-	       (setq c-toggle-hungry-state 1)
-	       (setq c-basic-offset 2)
-	       (setq c-hanging-comment-ender-p nil)
-	       (setq indent-tabs-mode nil))))
+      '(lambda ()
+         (progn
+           (setq c-toggle-hungry-state 1)
+           (setq c-basic-offset 2)
+           (setq c-hanging-comment-ender-p nil)
+           (setq indent-tabs-mode nil))))
 
 ;; yaml-mode
 ;(load-library "/home/key/.elisp/yaml-mode.el")
