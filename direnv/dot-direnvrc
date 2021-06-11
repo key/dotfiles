@@ -1,0 +1,19 @@
+use_nvm() {
+  watch_file .nvmrc
+  local NVM_PATH="$HOME/.nvm/nvm.sh"
+  if ! [ -f "$NVM_PATH" ]; then
+    echo "Installing NVM" >&2
+    curl -o- https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
+  fi
+  . "${NVM_PATH}"
+  nvm install
+  layout node
+}
+
+use_docker-machine(){
+  local env=${1:-default}
+  echo Docker machine: $env
+  local machine_cmd=$(docker-machine env --shell bash $env)
+
+  eval $(docker-machine env --shell bash $env)
+}
