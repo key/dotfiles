@@ -5,6 +5,10 @@ mkdir -p ~/.config/git
 TMPFILE=$(mktemp)
 echo "$TMPFILE"
 
+# personal ignore settings
+echo "# Personal ignore settings" >>"$TMPFILE"
+cat ./dot-gitignore >"$TMPFILE"
+
 # tools
 {
 	cat ../vendor/github/gitignore/Global/JetBrains.gitignore
@@ -28,6 +32,6 @@ echo "$TMPFILE"
 	cat ../vendor/github/gitignore/Swift.gitignore
 } >>"$TMPFILE"
 
-mv "$TMPFILE" ~/.config/git/ignore
+install -m 644 "$TMPFILE" ~/.config/git/ignore
 
 echo "Succeeded!"

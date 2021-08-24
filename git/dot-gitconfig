@@ -1,5 +1,7 @@
 [core]
-    excludesfile = /Users/key/.gitignore_global
+    excludesfile = /Users/key/.config/git/ignore
 [user]
     email = mitsukuni.sato@gmail.com
     name = key
+[init]
+    defaultBranch = main
